@@ -1,1 +1,51 @@
-
+services:
+  - type: web
+    name: hot-portion-backend
+    runtime: python
+    plan: starter          # or "free" — note free tier sleeps after 15 min
+    region: oregon         # pick the region closest to your users
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: ADMIN_API_KEY
+        sync: false
+      - key: BREVO_API_KEY
+        sync: false
+      - key: BREVO_SENDER_EMAIL
+        sync: false
+      - key: BREVO_SENDER_NAME
+        value: Hot Portion Grill
+      - key: MONNIFY_API_KEY
+        sync: false
+      - key: MONNIFY_SECRET_KEY
+        sync: false
+      - key: MONNIFY_CONTRACT_CODE
+        sync: false
+      - key: MONNIFY_BASE_URL
+        value: https://sandbox.monnify.com
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: AWS_REGION
+        value: af-south-1
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+      - key: AWS_LOCATION_PLACE_INDEX
+        value: hotportion-place-index
+      - key: AWS_LOCATION_COUNTRY_FILTER
+        value: NGA
+      - key: ALLOWED_ORIGINS
+        value: '["https://your-frontend.vercel.app"]'
+      - key: DEBUG
+        value: "false"
