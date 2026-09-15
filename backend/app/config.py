@@ -3,8 +3,13 @@ from typing import List, Dict, Optional
 
 from pydantic import Field
 from pydantic_settings import BaseSettings
+from dotenv import load_dotenv
 
 
+load_dotenv()
+
+
+# ---------- CONFIGURATION ----------
 class Settings(BaseSettings):
     # Core
     SUPABASE_URL: str = Field(..., min_length=1)
